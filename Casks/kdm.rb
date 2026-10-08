@@ -16,12 +16,12 @@ cask "kdm" do
   end
 
   auto_updates true
+  depends_on :macos
 
   app "Kamal Desktop Manager.app"
 
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args: ["-dr", "com.apple.quarantine", "#{appdir}/Kamal Desktop Manager.app"]
+  postflight_steps do
+    run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{appdir}}/Kamal Desktop Manager.app"]
   end
 
   zap trash: [
